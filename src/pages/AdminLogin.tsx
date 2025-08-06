@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Shield, Eye, EyeOff } from 'lucide-react';
+import { Shield, Eye, EyeOff, Zap, ArrowLeft, Sparkles, Lock } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import api from '../utils/api';
 import type { AuthResponse } from '../types';
@@ -47,60 +47,80 @@ const AdminLogin: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        <div>
-          <div className="flex justify-center">
-            <div className="p-3 bg-red-600 rounded-full">
-              <Shield className="h-8 w-8 text-white" />
+    <div className="min-h-screen flex items-center justify-center relative overflow-hidden">
+      {/* Enhanced Animated Background */}
+      <div className="absolute inset-0">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-red-500/10 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-purple-500/8 rounded-full blur-3xl animate-float stagger-2"></div>
+        <div className="absolute top-1/2 left-1/2 w-72 h-72 bg-orange-500/10 rounded-full blur-3xl animate-float stagger-4"></div>
+      </div>
+
+      <div className="relative z-10 max-w-md w-full p-8">
+        <div className="card p-8 rounded-3xl animate-slide-in-up">
+          <div className="text-center mb-8">
+            <div className="mb-6">
+              <div className="w-20 h-20 mx-auto rounded-3xl bg-gradient-to-br from-red-400 to-orange-500 flex items-center justify-center shadow-xl animate-pulse-glow">
+                <Shield className="h-10 w-10 text-white" />
+              </div>
+              <div className="absolute inset-0 bg-red-400/20 rounded-3xl blur-xl"></div>
             </div>
-          </div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-white">
-            Admin Portal
-          </h2>
-          <p className="mt-2 text-center text-sm text-gray-300">
-            Secure administrative access
-          </p>
-          <div className="mt-4 text-center">
+            <h2 className="text-4xl font-black mb-4">
+              <span className="text-red-400 text-shadow">Admin</span>
+              <br />
+              <span className="gradient-text text-shadow">Nexus</span>
+            </h2>
+            <p className="text-slate-300 mb-6 leading-relaxed">
+              High-security administrative neural interface for system control operations
+            </p>
             <Link
               to="/login"
-              className="text-sm text-blue-400 hover:text-blue-300 transition-colors"
+              className="btn-ghost px-4 py-2 rounded-2xl text-sm font-medium flex items-center justify-center space-x-2 mx-auto max-w-fit group"
             >
-              ← Back to User Login
+              <ArrowLeft className="h-4 w-4 group-hover:-translate-x-1 transition-transform duration-300" />
+              <span>User Portal</span>
             </Link>
           </div>
-        </div>
-        
-        <div className="bg-gray-800 rounded-lg shadow-xl border border-gray-700 p-8">
+          
           <form className="space-y-6" onSubmit={handleSubmit}>
             {error && (
-              <div className="bg-red-900/50 border border-red-700 text-red-300 px-4 py-3 rounded-md">
-                {error}
+              <div className="card p-4 rounded-2xl border border-red-500/30 bg-gradient-to-r from-red-500/10 to-orange-500/10 animate-slide-in-up">
+                <div className="flex items-center space-x-2">
+                  <div className="w-2 h-2 bg-red-400 rounded-full"></div>
+                  <span className="text-red-300 text-sm font-medium">{error}</span>
+                </div>
               </div>
             )}
             
-            <div className="space-y-4">
-              <div>
-                <label htmlFor="username" className="block text-sm font-medium text-gray-300">
-                  Admin Username
+            <div className="space-y-6">
+              <div className="animate-slide-in-up stagger-1">
+                <label htmlFor="username" className="block text-sm font-semibold text-slate-300 mb-3">
+                  Admin Identifier
                 </label>
-                <input
-                  id="username"
-                  name="username"
-                  type="text"
-                  required
-                  value={formData.username}
-                  onChange={handleChange}
-                  className="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md shadow-sm placeholder-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
-                  placeholder="Enter admin username"
-                />
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <Shield className="h-5 w-5 text-slate-400" />
+                  </div>
+                  <input
+                    id="username"
+                    name="username"
+                    type="text"
+                    required
+                    value={formData.username}
+                    onChange={handleChange}
+                    className="w-full pl-12 pr-4 py-4 glass-dark border border-red-500/20 rounded-2xl text-white placeholder-slate-400 focus:outline-none focus:border-red-400 focus:ring-0 transition-all duration-300"
+                    placeholder="Enter admin credentials"
+                  />
+                </div>
               </div>
 
-              <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-300">
-                  Password
+              <div className="animate-slide-in-up stagger-2">
+                <label htmlFor="password" className="block text-sm font-semibold text-slate-300 mb-3">
+                  Security Key
                 </label>
-                <div className="mt-1 relative">
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <Lock className="h-5 w-5 text-slate-400" />
+                  </div>
                   <input
                     id="password"
                     name="password"
@@ -108,41 +128,54 @@ const AdminLogin: React.FC = () => {
                     required
                     value={formData.password}
                     onChange={handleChange}
-                    className="block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md shadow-sm placeholder-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 pr-10"
-                    placeholder="Enter admin password"
+                    className="w-full pl-12 pr-12 py-4 glass-dark border border-red-500/20 rounded-2xl text-white placeholder-slate-400 focus:outline-none focus:border-red-400 focus:ring-0 transition-all duration-300"
+                    placeholder="Enter security key"
                   />
                   <button
                     type="button"
-                    className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                    className="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 hover:text-red-400 transition-colors duration-300"
                     onClick={() => setShowPassword(!showPassword)}
                   >
-                    {showPassword ? (
-                      <EyeOff className="h-5 w-5 text-gray-400 hover:text-gray-300" />
-                    ) : (
-                      <Eye className="h-5 w-5 text-gray-400 hover:text-gray-300" />
-                    )}
+                    {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                   </button>
                 </div>
               </div>
             </div>
 
-            <div>
+            <div className="animate-slide-in-up stagger-3">
               <button
                 type="submit"
                 disabled={loading}
-                className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="w-full bg-gradient-to-r from-red-500 to-orange-500 text-white py-4 rounded-2xl font-bold hover:from-red-400 hover:to-orange-400 transition-all duration-300 glow-sm disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-3 group"
               >
-                <Shield className="h-5 w-5 mr-2" />
-                {loading ? 'Authenticating...' : 'Access Admin Portal'}
+                {loading ? (
+                  <>
+                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                    <span>Authenticating Neural Link...</span>
+                  </>
+                ) : (
+                  <>
+                    <Shield className="h-6 w-6 group-hover:animate-pulse-glow" />
+                    <span>ACCESS ADMIN NEXUS</span>
+                    <Zap className="h-6 w-6 group-hover:animate-bounce-gentle" />
+                  </>
+                )}
               </button>
             </div>
           </form>
-        </div>
-        
-        <div className="text-center">
-          <p className="text-xs text-gray-500">
-            Authorized personnel only. All access is monitored and logged.
-          </p>
+          
+          {/* Security Notice */}
+          <div className="card p-4 rounded-2xl border border-orange-500/20 bg-gradient-to-r from-orange-500/5 to-red-500/5 mt-6">
+            <div className="flex items-start space-x-3">
+              <Sparkles className="h-5 w-5 text-orange-400 mt-0.5" />
+              <div>
+                <div className="text-orange-300 text-sm font-semibold mb-1">Secure Admin Protocol</div>
+                <div className="text-orange-400/80 text-xs leading-relaxed">
+                  Authorized personnel only. All administrative actions are monitored, logged, and encrypted using quantum security protocols.
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

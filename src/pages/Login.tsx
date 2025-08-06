@@ -50,107 +50,149 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        <div>
-          <div className="flex justify-center">
-            <Heart className="h-12 w-12 text-primary-600" />
+    <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* Animated Background */}
+      <div className="absolute inset-0">
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-cyan-500/20 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-1/2 left-1/2 w-72 h-72 bg-pink-500/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '4s' }}></div>
+      </div>
+
+      <div className="max-w-md w-full space-y-8 relative z-10">
+        <div className="text-center animate-slide-in-up">
+          <div className="mx-auto h-16 w-16 flex items-center justify-center mb-6">
+            <div className="relative">
+              <Heart className="h-16 w-16 text-cyan-400 animate-pulse-neon" />
+              <div className="absolute inset-0 bg-cyan-400/20 rounded-full blur-lg"></div>
+            </div>
           </div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Sign in to your account
+          <h2 className="text-4xl font-bold gradient-text mb-4">
+            Access Portal
           </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
-            Or{' '}
+          <p className="text-gray-400">
+            Initialize neural connection to the network
+          </p>
+          <div className="flex items-center justify-center space-x-2 mt-4">
+            <span className="text-sm text-gray-500">New agent?</span>
             <Link
               to="/register"
-              className="font-medium text-primary-600 hover:text-primary-500"
+              className="font-medium text-cyan-400 hover:text-cyan-300 transition-colors duration-300"
             >
-              create a new account
+              Deploy Profile
             </Link>
-          </p>
-          <div className="mt-4 text-center">
+          </div>
+          <div className="mt-4">
             <Link
               to="/admin/login"
-              className="text-sm text-gray-500 hover:text-gray-700 transition-colors"
+              className="text-sm text-purple-400 hover:text-purple-300 transition-colors duration-300"
             >
-              Admin Access →
+              Admin Nexus →
             </Link>
           </div>
         </div>
-        
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          {error && (
-            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
-              {error}
-            </div>
-          )}
-          
-          <div className="space-y-4">
-            <div>
-              <label htmlFor="username" className="block text-sm font-medium text-gray-700">
-                Username
-              </label>
-              <input
-                id="username"
-                name="username"
-                type="text"
-                required
-                value={formData.username}
-                onChange={handleChange}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500"
-                placeholder="Enter your username"
-              />
-            </div>
 
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                Password
-              </label>
-              <div className="mt-1 relative">
+        <div className="glass-dark p-8 rounded-2xl border border-cyan-500/30 animate-fade-in-scale">
+          <form className="space-y-6" onSubmit={handleSubmit}>
+            {error && (
+              <div className="glass p-4 rounded-xl border border-red-500/30 bg-red-500/10">
+                <div className="text-sm text-red-400 flex items-center space-x-2">
+                  <div className="w-2 h-2 bg-red-400 rounded-full animate-pulse-neon"></div>
+                  <span>{error}</span>
+                </div>
+              </div>
+            )}
+
+            <div className="space-y-4">
+              <div>
+                <label htmlFor="username" className="block text-sm font-medium text-cyan-300 mb-2">
+                  Agent Identifier
+                </label>
                 <input
-                  id="password"
-                  name="password"
-                  type={showPassword ? 'text' : 'password'}
+                  id="username"
+                  name="username"
+                  type="text"
                   required
-                  value={formData.password}
+                  className="w-full px-4 py-3 glass rounded-xl border border-cyan-500/30 bg-transparent text-white placeholder-gray-400 focus-neon transition-all duration-300"
+                  placeholder="Enter your agent ID"
+                  value={formData.username}
                   onChange={handleChange}
-                  className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 pr-10"
-                  placeholder="Enter your password"
                 />
-                <button
-                  type="button"
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center"
-                  onClick={() => setShowPassword(!showPassword)}
-                >
-                  {showPassword ? (
-                    <EyeOff className="h-5 w-5 text-gray-400" />
-                  ) : (
-                    <Eye className="h-5 w-5 text-gray-400" />
-                  )}
-                </button>
+              </div>
+
+              <div>
+                <label htmlFor="password" className="block text-sm font-medium text-cyan-300 mb-2">
+                  Neural Key
+                </label>
+                <div className="relative">
+                  <input
+                    id="password"
+                    name="password"
+                    type={showPassword ? 'text' : 'password'}
+                    required
+                    className="w-full px-4 py-3 pr-12 glass rounded-xl border border-cyan-500/30 bg-transparent text-white placeholder-gray-400 focus-neon transition-all duration-300"
+                    placeholder="Enter your neural key"
+                    value={formData.password}
+                    onChange={handleChange}
+                  />
+                  <button
+                    type="button"
+                    className="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-cyan-400 transition-colors duration-300"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? (
+                      <EyeOff className="h-5 w-5" />
+                    ) : (
+                      <Eye className="h-5 w-5" />
+                    )}
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="flex items-center justify-between">
-            <Link
-              to="/forgot-password"
-              className="text-sm text-primary-600 hover:text-primary-500"
-            >
-              Forgot your password?
-            </Link>
-          </div>
+            <div className="flex items-center justify-between">
+              <Link
+                to="/forgot-password"
+                className="text-sm text-gray-400 hover:text-cyan-400 transition-colors duration-300"
+              >
+                Neural key recovery?
+              </Link>
+            </div>
 
-          <div>
             <button
               type="submit"
               disabled={loading}
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-gradient-to-r from-cyan-500 to-purple-600 text-white py-3 px-6 rounded-xl font-bold hover:from-cyan-400 hover:to-purple-500 transition-all duration-300 neon-glow-sm transform hover:scale-105 disabled:opacity-50 disabled:transform-none flex items-center justify-center space-x-2"
             >
-              {loading ? 'Signing in...' : 'Sign in'}
+              {loading ? (
+                <>
+                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                  <span>Initializing...</span>
+                </>
+              ) : (
+                <>
+                  <span>INITIALIZE CONNECTION</span>
+                  <div className="w-2 h-2 bg-white rounded-full animate-pulse-neon"></div>
+                </>
+              )}
             </button>
+          </form>
+        </div>
+
+        {/* Status Indicators */}
+        <div className="flex justify-center space-x-6 text-xs">
+          <div className="flex items-center space-x-2">
+            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse-neon"></div>
+            <span className="text-gray-400">Network Online</span>
           </div>
-        </form>
+          <div className="flex items-center space-x-2">
+            <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse-neon"></div>
+            <span className="text-gray-400">Portal Active</span>
+          </div>
+          <div className="flex items-center space-x-2">
+            <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse-neon"></div>
+            <span className="text-gray-400">Secure Link</span>
+          </div>
+        </div>
       </div>
     </div>
   );

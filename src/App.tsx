@@ -1,6 +1,7 @@
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
+import { SocketProvider } from './contexts/SocketContext';
 import Layout from './components/Layout';
 import AdminLayout from './components/AdminLayout';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -27,8 +28,9 @@ import AddDonation from './pages/admin/AddDonation';
 function App() {
   return (
     <AuthProvider>
-      <Router>
-        <Routes>
+      <SocketProvider>
+        <Router>
+          <Routes>
           <Route path="/" element={<Layout />}>
             {/* Public Routes */}
             <Route index element={<Home />} />
@@ -76,7 +78,8 @@ function App() {
             <Route path="add-donation" element={<AddDonation />} />
           </Route>
         </Routes>
-      </Router>
+        </Router>
+      </SocketProvider>
     </AuthProvider>
   );
 }
